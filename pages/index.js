@@ -3,9 +3,11 @@ import Link from 'next/link'
 import Header from '../components/header'
 
 export const getServerSideProps = async () => {
-  const { API_URL } = process.env
+  const { STRAPI_API_TOKEN, API_URL } = process.env
+  const api_key = `${API_URL}`
+  const strapi_token = `${STRAPI_API_TOKEN}`
 
-  const res = await fetch(`${API_URL}/api/products?populate=*`)
+  let res = await fetch(`${api_key}/api/products?populate=*`)
   const data = await res.json()
   return {
     props: {
